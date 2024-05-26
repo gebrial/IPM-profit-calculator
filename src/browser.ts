@@ -22,7 +22,8 @@ function makeTable() {
     headerRow.insertCell().textContent = 'Name'
     headerRow.insertCell().textContent = 'Sell Value'
     headerRow.insertCell().textContent = 'Craft Cost'
-    headerRow.insertCell().textContent = 'Profit'
+    headerRow.insertCell().textContent = 'Profit Per Item'
+    headerRow.insertCell().textContent = 'Profit Per Hour'
 
     // make body
     const body = table.createTBody()
@@ -32,6 +33,7 @@ function makeTable() {
         row.insertCell().textContent = resource.name
         row.insertCell().textContent = resource.base_sell_value.toString()
 
+        // calculate craft cost
         let craft_cost = 0
         resource.base_dependencies.forEach(dependency => {
             // calculates direct cost only
@@ -39,6 +41,12 @@ function makeTable() {
         })
         row.insertCell().textContent = craft_cost.toString()
 
-        row.insertCell().textContent = (resource.base_sell_value - craft_cost).toString()
+        // calculate profit per item
+        const profit = resource.base_sell_value - craft_cost
+        row.insertCell().textContent = profit.toString()
+
+        // calculate profit per hour
+        const profit_per_hour = 3600 * profit / resource.base_craft_time
+        row.insertCell().textContent = profit_per_hour.toString()
     })
 }
