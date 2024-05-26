@@ -28,7 +28,7 @@ function makeTable() {
         const row = body.insertRow();
         row.insertCell().textContent = resource.name;
         row.insertCell().textContent = resource.base_sell_value.toString();
-        var craft_cost = 0;
+        let craft_cost = 0;
         resource.base_dependencies.forEach(dependency => {
             // calculates direct cost only
             craft_cost += dependency.resource.base_sell_value * dependency.amount;
