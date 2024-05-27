@@ -15,6 +15,8 @@ export type Resource = {
     base_craft_time: number,
 }
 
+const resourceList = []
+
 // ORES
 
 export const copperOreResource: Resource = {
@@ -24,6 +26,7 @@ export const copperOreResource: Resource = {
     type: ResourceType.ORE,
     base_craft_time: 0,
 }
+resourceList.push(copperOreResource)
 
 export const ironOreResource: Resource = {
     name: "Iron Ore",
@@ -32,6 +35,7 @@ export const ironOreResource: Resource = {
     type: ResourceType.ORE,
     base_craft_time: 0,
 }
+resourceList.push(ironOreResource)
 
 export const leadOreResource: Resource = {
     name: "Lead Bar",
@@ -40,7 +44,34 @@ export const leadOreResource: Resource = {
     type: ResourceType.ORE,
     base_craft_time: 0,
 }
+resourceList.push(leadOreResource)
 
+export const silicaOreResource: Resource = {
+    name: "Silica Ore",
+    base_dependencies: [],
+    base_sell_value: 8,
+    type: ResourceType.ORE,
+    base_craft_time: 0,
+}
+resourceList.push(silicaOreResource)
+
+export const aluminumOreResource: Resource = {
+    name: "Aluminum Ore",
+    base_dependencies: [],
+    base_sell_value: 17,
+    type: ResourceType.ORE,
+    base_craft_time: 0,
+}
+resourceList.push(aluminumOreResource)
+
+export const silverOreResource: Resource = {
+    name: "Silver Ore",
+    base_dependencies: [],
+    base_sell_value: 36,
+    type: ResourceType.ORE,
+    base_craft_time: 0,
+}
+resourceList.push(silverOreResource)
 
 // ALLOYS
 
@@ -51,6 +82,7 @@ export const copperBarResource: Resource = {
     type: ResourceType.ALLOY,
     base_craft_time: 20,
 }
+resourceList.push(copperBarResource)
 
 export const ironBarResource: Resource = {
     name: "Iron Bar",
@@ -59,6 +91,7 @@ export const ironBarResource: Resource = {
     type: ResourceType.ALLOY,
     base_craft_time: 30,
 }
+resourceList.push(ironBarResource)
 
 export const leadBarResource: Resource = {
     name: "Lead Bar",
@@ -67,6 +100,35 @@ export const leadBarResource: Resource = {
     type: ResourceType.ALLOY,
     base_craft_time: 40,
 }
+resourceList.push(leadBarResource)
+
+export const silicaBarResource: Resource = {
+    name: "Silica Bar",
+    base_dependencies: [{ resource: silicaOreResource, amount: 1000 }],
+    base_sell_value: 12500,
+    type: ResourceType.ALLOY,
+    base_craft_time: 60,
+}
+resourceList.push(silicaBarResource)
+
+export const aluminumBarResource: Resource = {
+    name: "Aluminum Bar",
+    base_dependencies: [{ resource: aluminumOreResource, amount: 1000 }],
+    base_sell_value: 27600,
+    type: ResourceType.ALLOY,
+    base_craft_time: 80,
+}
+resourceList.push(aluminumBarResource)
+
+export const silverBarResource: Resource = {
+    name: "Silver Bar",
+    base_dependencies: [{ resource: silverOreResource, amount: 1000 }],
+    base_sell_value: 60000,
+    type: ResourceType.ALLOY,
+    base_craft_time: 120,
+}
+resourceList.push(silverBarResource)
+
 
 // ITEMS
 
@@ -77,6 +139,7 @@ export const copperWireResource: Resource = {
     type: ResourceType.ITEM,
     base_craft_time: 60,
 }
+resourceList.push(copperWireResource)
 
 export const ironNailResource: Resource = {
     name: "Iron Nail",
@@ -85,6 +148,7 @@ export const ironNailResource: Resource = {
     type: ResourceType.ITEM,
     base_craft_time: 120,
 }
+resourceList.push(ironNailResource)
 
 export const batteryResource: Resource = {
     name: "Battery",
@@ -96,6 +160,7 @@ export const batteryResource: Resource = {
     type: ResourceType.ITEM,
     base_craft_time: 240,
 }
+resourceList.push(batteryResource)
 
 export const hammerResource: Resource = {
     name: "Hammer",
@@ -107,16 +172,42 @@ export const hammerResource: Resource = {
     type: ResourceType.ITEM,
     base_craft_time: 480,
 }
+resourceList.push(hammerResource)
 
-export const resources = [
-    copperOreResource,
-    ironOreResource,
-    leadOreResource,
-    copperBarResource,
-    ironBarResource,
-    leadBarResource,
-    copperWireResource,
-    ironNailResource,
-    batteryResource,
-    hammerResource,
-]
+export const glassResource: Resource = {
+    name: "Glass",
+    base_dependencies: [
+        { resource: silicaBarResource, amount: 10 },
+    ],
+    base_sell_value: 220000,
+    type: ResourceType.ITEM,
+    base_craft_time: 720,
+}
+resourceList.push(glassResource)
+
+export const circuitResource: Resource = {
+    name: "Circuit",
+    base_dependencies: [
+        { resource: silicaBarResource, amount: 5 },
+        { resource: aluminumBarResource, amount: 5 },
+        { resource: copperWireResource, amount: 10 },
+    ],
+    base_sell_value: 620000,
+    type: ResourceType.ITEM,
+    base_craft_time: 1200,
+}
+resourceList.push(circuitResource)
+
+export const lensResource: Resource = {
+    name: "Lens",
+    base_dependencies: [
+        { resource: glassResource, amount: 1 },
+        { resource: silverBarResource, amount: 5 },
+    ],
+    base_sell_value: 1100000,
+    type: ResourceType.ITEM,
+    base_craft_time: 2400,
+}
+resourceList.push(lensResource)
+
+export const resources = resourceList
