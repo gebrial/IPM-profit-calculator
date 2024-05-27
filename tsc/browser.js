@@ -19,6 +19,7 @@ function makeTable() {
     const header = table.createTHead();
     const headerRow = header.insertRow();
     headerRow.insertCell().textContent = 'Name';
+    headerRow.insertCell().textContent = 'Stars';
     headerRow.insertCell().textContent = 'Sell Value';
     headerRow.insertCell().textContent = 'Craft Cost';
     headerRow.insertCell().textContent = 'Profit Per Item';
@@ -28,20 +29,38 @@ function makeTable() {
     resources.resources.forEach(resource => {
         const row = body.insertRow();
         row.insertCell().textContent = resource.name;
-        row.insertCell().textContent = resource.base_sell_value.toString();
-        // calculate craft cost
-        let craft_cost = 0;
-        resource.base_dependencies.forEach(dependency => {
-            // calculates direct cost only
-            craft_cost += dependency.resource.base_sell_value * dependency.amount;
+        // add number input for stars
+        const starsInput = document.createElement('input');
+        starsInput.type = 'number';
+        starsInput.value = '0';
+        row.insertCell().appendChild(starsInput);
+        const sellValueCell = row.insertCell();
+        const craftCostCell = row.insertCell();
+        const profitCell = row.insertCell();
+        const profitPerHourCell = row.insertCell();
+        // add on change event listener for stars input
+        starsInput.addEventListener('change', () => {
+            // recalculate all values in row and upstream dependencies
+            const stars = parseInt(starsInput.value);
+            const baseSellValue = resource.base_sell_value;
+            // rounding to avoid floating point errors
+            const sellValue = Math.round(baseSellValue * (1 + 0.2 * stars));
+            sellValueCell.textContent = sellValue.toString();
+            // calculate craft cost
+            let craft_cost = 0;
+            resource.base_dependencies.forEach(dependency => {
+                // calculates direct cost only
+                craft_cost += dependency.resource.base_sell_value * dependency.amount;
+            });
+            craftCostCell.textContent = craft_cost.toString();
+            // calculate profit per item
+            const profit = sellValue - craft_cost;
+            profitCell.textContent = profit.toString();
+            // calculate profit per hour
+            const profit_per_hour = 3600 * profit / resource.base_craft_time;
+            profitPerHourCell.textContent = profit_per_hour.toString();
         });
-        row.insertCell().textContent = craft_cost.toString();
-        // calculate profit per item
-        const profit = resource.base_sell_value - craft_cost;
-        row.insertCell().textContent = profit.toString();
-        // calculate profit per hour
-        const profit_per_hour = 3600 * profit / resource.base_craft_time;
-        row.insertCell().textContent = profit_per_hour.toString();
+        starsInput.dispatchEvent(new Event('change'));
     });
 }
 //# sourceMappingURL=browser.js.map
