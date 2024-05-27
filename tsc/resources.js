@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.resources = exports.lensResource = exports.circuitResource = exports.glassResource = exports.hammerResource = exports.batteryResource = exports.ironNailResource = exports.copperWireResource = exports.silverBarResource = exports.aluminumBarResource = exports.silicaBarResource = exports.leadBarResource = exports.ironBarResource = exports.copperBarResource = exports.silverOreResource = exports.aluminumOreResource = exports.silicaOreResource = exports.leadOreResource = exports.ironOreResource = exports.copperOreResource = exports.ResourceType = void 0;
+exports.resources = exports.advancedBatteryResource = exports.laserTorchResource = exports.solarPanelResource = exports.basicComputerResource = exports.laserResource = exports.lensResource = exports.circuitResource = exports.glassResource = exports.hammerResource = exports.batteryResource = exports.ironNailResource = exports.copperWireResource = exports.steelBarResource = exports.bronzeBarResource = exports.goldBarResource = exports.silverBarResource = exports.aluminumBarResource = exports.silicaBarResource = exports.leadBarResource = exports.ironBarResource = exports.copperBarResource = exports.goldOreResource = exports.silverOreResource = exports.aluminumOreResource = exports.silicaOreResource = exports.leadOreResource = exports.ironOreResource = exports.copperOreResource = exports.ResourceType = void 0;
 var ResourceType;
 (function (ResourceType) {
     ResourceType["ORE"] = "ORE";
@@ -57,6 +57,14 @@ exports.silverOreResource = {
     base_craft_time: 0,
 };
 resourceList.push(exports.silverOreResource);
+exports.goldOreResource = {
+    name: "Gold Ore",
+    base_dependencies: [],
+    base_sell_value: 75,
+    type: ResourceType.ORE,
+    base_craft_time: 0,
+};
+resourceList.push(exports.goldOreResource);
 // ALLOYS
 exports.copperBarResource = {
     name: "Copper Bar",
@@ -106,6 +114,36 @@ exports.silverBarResource = {
     base_craft_time: 120,
 };
 resourceList.push(exports.silverBarResource);
+exports.goldBarResource = {
+    name: "Gold Bar",
+    base_dependencies: [{ resource: exports.goldOreResource, amount: 1000 }],
+    base_sell_value: 120000,
+    type: ResourceType.ALLOY,
+    base_craft_time: 180,
+};
+resourceList.push(exports.goldBarResource);
+exports.bronzeBarResource = {
+    name: "Bronze Bar",
+    base_dependencies: [
+        { resource: exports.copperBarResource, amount: 10 },
+        { resource: exports.silverBarResource, amount: 2 },
+    ],
+    base_sell_value: 234000,
+    type: ResourceType.ALLOY,
+    base_craft_time: 240,
+};
+resourceList.push(exports.bronzeBarResource);
+exports.steelBarResource = {
+    name: "Steel Bar",
+    base_dependencies: [
+        { resource: exports.ironBarResource, amount: 30 },
+        { resource: exports.leadBarResource, amount: 15 },
+    ],
+    base_sell_value: 340000,
+    type: ResourceType.ALLOY,
+    base_craft_time: 480,
+};
+resourceList.push(exports.steelBarResource);
 // ITEMS
 exports.copperWireResource = {
     name: "Copper Wire",
@@ -178,5 +216,62 @@ exports.lensResource = {
     base_craft_time: 2400,
 };
 resourceList.push(exports.lensResource);
+exports.laserResource = {
+    name: "Laser",
+    base_dependencies: [
+        { resource: exports.lensResource, amount: 1 },
+        { resource: exports.goldBarResource, amount: 5 },
+        { resource: exports.ironBarResource, amount: 10 },
+    ],
+    base_sell_value: 3200000,
+    type: ResourceType.ITEM,
+    base_craft_time: 3600,
+};
+resourceList.push(exports.laserResource);
+exports.basicComputerResource = {
+    name: "Basic Computer",
+    base_dependencies: [
+        { resource: exports.circuitResource, amount: 5 },
+        { resource: exports.silverBarResource, amount: 5 },
+    ],
+    base_sell_value: 7600000,
+    type: ResourceType.ITEM,
+    base_craft_time: 4800,
+};
+resourceList.push(exports.basicComputerResource);
+exports.solarPanelResource = {
+    name: "Solar Panel",
+    base_dependencies: [
+        { resource: exports.glassResource, amount: 10 },
+        { resource: exports.circuitResource, amount: 5 },
+    ],
+    base_sell_value: 12500000,
+    type: ResourceType.ITEM,
+    base_craft_time: 6000,
+};
+resourceList.push(exports.solarPanelResource);
+exports.laserTorchResource = {
+    name: "Laser Torch",
+    base_dependencies: [
+        { resource: exports.laserResource, amount: 2 },
+        { resource: exports.bronzeBarResource, amount: 5 },
+        { resource: exports.lensResource, amount: 5 },
+    ],
+    base_sell_value: 31000000,
+    type: ResourceType.ITEM,
+    base_craft_time: 7200,
+};
+resourceList.push(exports.laserTorchResource);
+exports.advancedBatteryResource = {
+    name: "Advanced Battery",
+    base_dependencies: [
+        { resource: exports.batteryResource, amount: 30 },
+        { resource: exports.steelBarResource, amount: 20 },
+    ],
+    base_sell_value: 35000000,
+    type: ResourceType.ITEM,
+    base_craft_time: 9000,
+};
+resourceList.push(exports.advancedBatteryResource);
 exports.resources = resourceList;
 //# sourceMappingURL=resources.js.map
