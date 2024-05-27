@@ -73,6 +73,15 @@ export const silverOreResource: Resource = {
 }
 resourceList.push(silverOreResource)
 
+export const goldOreResource: Resource = {
+    name: "Gold Ore",
+    base_dependencies: [],
+    base_sell_value: 75,
+    type: ResourceType.ORE,
+    base_craft_time: 0,
+}
+resourceList.push(goldOreResource)
+
 // ALLOYS
 
 export const copperBarResource: Resource = {
@@ -129,6 +138,38 @@ export const silverBarResource: Resource = {
 }
 resourceList.push(silverBarResource)
 
+export const goldBarResource: Resource = {
+    name: "Gold Bar",
+    base_dependencies: [{ resource: goldOreResource, amount: 1000 }],
+    base_sell_value: 120000,
+    type: ResourceType.ALLOY,
+    base_craft_time: 180,
+}
+resourceList.push(goldBarResource)
+
+export const bronzeBarResource: Resource = {
+    name: "Bronze Bar",
+    base_dependencies: [
+        { resource: copperBarResource, amount: 10 },
+        { resource: silverBarResource, amount: 2 },
+    ],
+    base_sell_value: 234000,
+    type: ResourceType.ALLOY,
+    base_craft_time: 240,
+}
+resourceList.push(bronzeBarResource)
+
+export const steelBarResource: Resource = {
+    name: "Steel Bar",
+    base_dependencies: [
+        { resource: ironBarResource, amount: 30 },
+        { resource: leadBarResource, amount: 15 },
+    ],
+    base_sell_value: 340000,
+    type: ResourceType.ALLOY,
+    base_craft_time: 480,
+}
+resourceList.push(steelBarResource)
 
 // ITEMS
 
@@ -209,5 +250,68 @@ export const lensResource: Resource = {
     base_craft_time: 2400,
 }
 resourceList.push(lensResource)
+
+export const laserResource: Resource = {
+    name: "Laser",
+    base_dependencies: [
+        { resource: lensResource, amount: 1 },
+        { resource: goldBarResource, amount: 5 },
+        { resource: ironBarResource, amount: 10 },
+    ],
+    base_sell_value: 3200000,
+    type: ResourceType.ITEM,
+    base_craft_time: 3600,
+}
+resourceList.push(laserResource)
+
+export const basicComputerResource: Resource = {
+    name: "Basic Computer",
+    base_dependencies: [
+        { resource: circuitResource, amount: 5 },
+        { resource: silverBarResource, amount: 5 },
+    ],
+    base_sell_value: 7600000,
+    type: ResourceType.ITEM,
+    base_craft_time: 4800,
+}
+resourceList.push(basicComputerResource)
+
+export const solarPanelResource: Resource = {
+    name: "Solar Panel",
+    base_dependencies: [
+        { resource: glassResource, amount: 10 },
+        { resource: circuitResource, amount: 5 },
+    ],
+    base_sell_value: 12500000,
+    type: ResourceType.ITEM,
+    base_craft_time: 6000,
+}
+resourceList.push(solarPanelResource)
+
+export const laserTorchResource: Resource = {
+    name: "Laser Torch",
+    base_dependencies: [
+        { resource: laserResource, amount: 2 },
+        { resource: bronzeBarResource, amount: 5 },
+        { resource: lensResource, amount: 5 },
+    ],
+    base_sell_value: 31000000,
+    type: ResourceType.ITEM,
+    base_craft_time: 7200,
+}
+resourceList.push(laserTorchResource)
+
+export const advancedBatteryResource: Resource = {
+    name: "Advanced Battery",
+    base_dependencies: [
+        { resource: batteryResource, amount: 30 },
+        { resource: steelBarResource, amount: 20 },
+    ],
+    base_sell_value: 35000000,
+    type: ResourceType.ITEM,
+    base_craft_time: 9000,
+}
+resourceList.push(advancedBatteryResource)
+
 
 export const resources = resourceList
