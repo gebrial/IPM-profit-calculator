@@ -1,20 +1,5 @@
-export declare enum ResourceType {
-    ORE = "ORE",
-    ALLOY = "ALLOY",
-    ITEM = "ITEM"
-}
-export declare type Resource = {
-    name: string;
-    base_dependencies: {
-        resource: Resource;
-        amount: number;
-    }[];
-    base_sell_value: number;
-    type: ResourceType;
-    base_craft_time: number;
-};
+import { Resource } from "./Resource";
 export declare const copperOreResource: Resource;
-export declare const ironOreResource: Resource;
 export declare const leadOreResource: Resource;
 export declare const silicaOreResource: Resource;
 export declare const aluminumOreResource: Resource;
