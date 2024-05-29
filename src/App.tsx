@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useTable } from "react-table";
 
 import makeData from "./makeData";
+import { access } from "fs";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -39,10 +40,7 @@ function Table({
 }: {
   columns: {
     Header: string;
-    columns: {
-      Header: string;
-      accessor: string;
-    }[];
+    accessor: string;
   }[];
   data: any;
 }) {
@@ -86,43 +84,33 @@ function App() {
     () => [
       {
         Header: "Name",
-        columns: [
-          {
-            Header: "First Name",
-            accessor: "firstName",
-          },
-          {
-            Header: "Last Name",
-            accessor: "lastName",
-          },
-        ],
+        accessor: "name",
       },
       {
-        Header: "Info",
-        columns: [
-          {
-            Header: "Age",
-            accessor: "age",
-          },
-          {
-            Header: "Visits",
-            accessor: "visits",
-          },
-          {
-            Header: "Status",
-            accessor: "status",
-          },
-          {
-            Header: "Profile Progress",
-            accessor: "progress",
-          },
-        ],
+        Header: "Stars",
+        accessor: "stars",
       },
+      {
+        Header: "Sell Value",
+        accessor: "sellValue",
+      },
+      {
+        Header: "Craft Cost",
+        accessor: "craftCost",
+      },
+      {
+        Header: "Item Profit",
+        accessor: "itemProfit",
+      },
+      {
+        Header: "Profit Per Hour",
+        accessor: "profitPerHour",
+      }
     ],
     []
   );
 
-  const data = React.useMemo(() => makeData(20), []);
+  const data = React.useMemo(() => makeData(), []);
 
   return (
     <Styles>
